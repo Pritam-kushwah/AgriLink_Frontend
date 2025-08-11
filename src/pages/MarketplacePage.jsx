@@ -16,21 +16,26 @@ const MarketplacePage = () => {
   const [showDetails, setShowDetails] = useState(false);
 
   useEffect(() => {
-    setFilteredProducts(marketData);
-  }, [marketData]);
+  // Remove duplicates by product id
+  const uniqueProducts = Array.from(
+    new Map(marketData.map(item => [item.id, item])).values()
+  );
+  setFilteredProducts(uniqueProducts);
+  console.log('marketData:', marketData);
+}, [marketData]);
 
   const handleFilterChange = (filters) => {
     let filtered = [...marketData];
 
     // Apply search filter
     if (filters.search) {
-      const search = filters.search.toLowerCase();
-      filtered = filtered.filter(product => 
-        product.cropType.toLowerCase().includes(search) ||
-        product.farmer?.name.toLowerCase().includes(search) ||
-        product.farmer?.location.toLowerCase().includes(search)
-      );
-    }
+  const search = filters.search.toLowerCase();
+  filtered = filtered.filter(product => 
+    product.cropType.toLowerCase().includes(search) ||
+    (product.farmerName && product.farmerName.toLowerCase().includes(search)) ||
+    (product.farmerLocation && product.farmerLocation.toLowerCase().includes(search))
+    );
+  }
 
     // Apply crop type filter
     if (filters.cropType) {
@@ -39,7 +44,7 @@ const MarketplacePage = () => {
 
     // Apply location filter
     if (filters.location) {
-      filtered = filtered.filter(product => product.farmer?.location === filters.location);
+      filtered = filtered.filter(product => product.farmerLocation === filters.location);
     }
 
     // Apply price range filter
@@ -81,8 +86,8 @@ const MarketplacePage = () => {
   const handleSearch = (searchTerm) => {
     const filtered = marketData.filter(product => 
       product.cropType.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      product.farmer?.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      product.farmer?.location.toLowerCase().includes(searchTerm.toLowerCase())
+      product.farmerName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.farmerLocation.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredProducts(filtered);
   };
@@ -96,7 +101,7 @@ const MarketplacePage = () => {
     try {
       await updateProduceStatus(id, status);
       // Update the local state
-      setFilteredProducts(prev => 
+       setFilteredProducts(prev => 
         prev.map(product => 
           product.id === id ? { ...product, status } : product
         )

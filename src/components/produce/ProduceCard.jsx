@@ -36,11 +36,11 @@ const ProduceCard = ({ produce, onViewDetails, onUpdateStatus }) => {
         </div>
         <div className="flex items-center space-x-2">
           <User className="h-4 w-4" />
-          <span>{produce.farmer?.name || 'Unknown Farmer'}</span>
+          <span>{produce.farmerName || 'Unknown Farmer'}</span>
         </div>
         <div className="flex items-center space-x-2">
           <MapPin className="h-4 w-4" />
-          <span>{produce.farmer?.location || 'Unknown Location'}</span>
+          <span>{produce.farmerLocation || 'Unknown Location'}</span>
         </div>
       </div>
 

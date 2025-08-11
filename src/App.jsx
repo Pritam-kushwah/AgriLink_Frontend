@@ -42,11 +42,11 @@ const App = () => {
       </main>
 
       {showAddFarmer && (
-        <AddFarmerModal onClose={() => setShowAddFarmer(false)} />
-      )}
+  <AddFarmerModal isOpen={showAddFarmer} onClose={() => setShowAddFarmer(false)} />
+   )}
       
       {showAddProduce && (
-        <AddProduceModal onClose={() => setShowAddProduce(false)} />
+        <AddProduceModal isOpen={showAddProduce} onClose={() => setShowAddProduce(false)} />
       )}
     </div>
   );

@@ -37,8 +37,10 @@ const AddFarmerModal = ({ isOpen, onClose, editFarmer = null }) => {
       };
 
       if (editFarmer) {
+        console.log('Editing farmerData:', farmerData);
         await updateFarmer(editFarmer.id, farmerData);
       } else {
+        console.log('Submitting farmerData:', farmerData);
         await addFarmer(farmerData);
       }
 
@@ -192,7 +194,7 @@ const AddFarmerModal = ({ isOpen, onClose, editFarmer = null }) => {
             disabled={loading}
             className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50"
           >
-            {loading ? 'Saving...' : editFarmer ? 'Update Farmer' : 'Add Farmer'}
+            {loading ? 'Saving...' : editFarmer ? 'Update Farmer' : 'Save Farmer'}
           </button>
         </div>
       </form>

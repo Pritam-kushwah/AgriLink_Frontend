@@ -102,13 +102,21 @@ const AnalyticsPage = () => {
                   <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg">
                     <span className="text-green-800 font-medium">Most Popular Crop</span>
                     <span className="text-green-900 font-bold">
-                      {/* Calculate most popular crop */}
-                      {produces.reduce((acc, p) => {
-                        acc[p.cropType] = (acc[p.cropType] || 0) + 1;
-                        return acc;
-                      }, {})}
-                      Rice {/* Simplified - would calculate dynamically */}
-                    </span>
+  {(() => {
+    const counts = produces.reduce((acc, p) => {
+      acc[p.cropType] = (acc[p.cropType] || 0) + 1;
+      return acc;
+    }, {});
+
+    // Find the crop type with the highest count
+    const mostPopular = Object.keys(counts).reduce((a, b) =>
+      counts[a] > counts[b] ? a : b
+    , '');
+
+    return mostPopular || 'N/A';
+  })()}
+</span>
+
                   </div>
                   <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
                     <span className="text-blue-800 font-medium">Avg Farm Size</span>

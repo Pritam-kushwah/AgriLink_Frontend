@@ -37,15 +37,15 @@ const ProductCard = ({ product, onViewDetails }) => {
               <p className="text-xs text-gray-500">Total: ₹{totalValue.toLocaleString()}</p>
             </div>
           </div>
-
+            {/* console.log(product); */}
           <div className="flex items-center space-x-2 text-sm text-gray-600">
             <User className="h-4 w-4" />
-            <span className="truncate">{product.farmer?.name || 'Unknown Farmer'}</span>
+            <span className="truncate">{product.farmerName || 'Unknown Farmer'}</span>
           </div>
 
           <div className="flex items-center space-x-2 text-sm text-gray-600">
             <MapPin className="h-4 w-4" />
-            <span className="truncate">{product.farmer?.location || 'Unknown Location'}</span>
+            <span className="truncate">{product.farmerLocation || 'Unknown Location'}</span>
           </div>
 
           <div className="flex items-center space-x-2 text-sm text-gray-600">

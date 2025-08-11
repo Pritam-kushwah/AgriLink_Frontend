@@ -1,21 +1,28 @@
 import React, { useState } from 'react';
-import { Plus, Search, Filter } from 'lucide-react';
+import { Plus, Search } from 'lucide-react';
 import FarmersList from '../components/farmers/FarmersList';
 import FarmerProfile from '../components/farmers/FarmerProfile';
+import AddFarmerModal from '../components/farmers/AddFarmerModal';
 import { useFarmers } from '../hooks/useFarmers';
 
-const FarmersPage = ({ onShowAddFarmer }) => {
-  const { farmers, loading, updateFarmer, deleteFarmer } = useFarmers();
+const FarmersPage = () => {
+  const { farmers, loading, deleteFarmer } = useFarmers();
+
   const [selectedFarmer, setSelectedFarmer] = useState(null);
   const [showProfile, setShowProfile] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [locationFilter, setLocationFilter] = useState('');
 
+  // State for Add/Edit Farmer Modal
+  const [isAddFarmerOpen, setIsAddFarmerOpen] = useState(false);
+  const [editFarmer, setEditFarmer] = useState(null);
+
   // Filter farmers based on search and location
   const filteredFarmers = farmers.filter(farmer => {
-    const matchesSearch = farmer.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         farmer.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         farmer.phone.includes(searchTerm);
+    const matchesSearch =
+      farmer.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      farmer.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      farmer.phone.includes(searchTerm);
     const matchesLocation = !locationFilter || farmer.location === locationFilter;
     return matchesSearch && matchesLocation;
   });
@@ -27,9 +34,14 @@ const FarmersPage = ({ onShowAddFarmer }) => {
     setShowProfile(true);
   };
 
+  const handleAddNew = () => {
+    setEditFarmer(null); // clear any edit data
+    setIsAddFarmerOpen(true);
+  };
+
   const handleEdit = (farmer) => {
-    // This would open the edit modal - implementation depends on parent component
-    console.log('Edit farmer:', farmer);
+    setEditFarmer(farmer); // store farmer to edit
+    setIsAddFarmerOpen(true); // open modal
   };
 
   const handleDelete = async (farmer) => {
@@ -50,8 +62,8 @@ const FarmersPage = ({ onShowAddFarmer }) => {
           <h1 className="text-3xl font-bold text-gray-900">Farmers Management</h1>
           <p className="text-gray-600 mt-2">Manage and track your network of farmers</p>
         </div>
-        <button 
-          onClick={onShowAddFarmer}
+        <button
+          onClick={handleAddNew}
           className="mt-4 sm:mt-0 bg-green-600 text-white px-6 py-3 rounded-xl hover:bg-green-700 transition-all duration-200 flex items-center space-x-2 font-medium"
         >
           <Plus className="h-4 w-4" />
@@ -138,6 +150,13 @@ const FarmersPage = ({ onShowAddFarmer }) => {
           setShowProfile(false);
           setSelectedFarmer(null);
         }}
+      />
+
+      {/* Add/Edit Farmer Modal */}
+      <AddFarmerModal
+        isOpen={isAddFarmerOpen}
+        onClose={() => setIsAddFarmerOpen(false)}
+        editFarmer={editFarmer}
       />
     </div>
   );

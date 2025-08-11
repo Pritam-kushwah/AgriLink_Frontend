@@ -73,11 +73,11 @@ const ProduceDetails = ({ produce, isOpen, onClose, onUpdateStatus }) => {
             <div className="bg-gray-50 rounded-lg p-4 space-y-3">
               <div className="flex items-center space-x-2">
                 <User className="h-4 w-4 text-gray-600" />
-                <span className="font-medium">{produce.farmer?.name || 'Unknown'}</span>
+                <span className="font-medium">{produce.farmerName || 'Unknown'}</span>
               </div>
               <div className="flex items-center space-x-2">
                 <MapPin className="h-4 w-4 text-gray-600" />
-                <span>{produce.farmer?.location || 'Unknown'}</span>
+                <span>{produce.farmerLocation || 'Unknown'}</span>
               </div>
             </div>
           </div>
