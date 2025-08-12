@@ -121,12 +121,20 @@ const MarketplacePage = () => {
     filteredProducts.reduce((sum, p) => sum + p.pricePerUnit, 0) / filteredProducts.length : 0;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6"
+       style={{
+        //backgroundImage: "url('/Farming2.jpg')",
+        backgroundImage: "url('/Home farm 1.jpg')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        minHeight: '100vh'
+      }}
+    >
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Marketplace</h1>
-          <p className="text-gray-600 mt-2">Browse and manage available produce</p>
+          <h1 className="text-3xl font-bold text-black">Marketplace</h1>
+          <h3 className="text-black mt-2">Browse and manage available produce</h3>
         </div>
         <div className="mt-4 sm:mt-0">
           <div className="flex items-center space-x-2 text-sm text-gray-600">

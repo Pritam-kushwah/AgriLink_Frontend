@@ -55,12 +55,20 @@ const FarmersPage = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6"
+      style={{
+        //backgroundImage: "url('/Farming2.jpg')",
+        backgroundImage: "url('/Home farm 1.jpg')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        minHeight: '100vh'
+      }}
+    >
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Farmers Management</h1>
-          <p className="text-gray-600 mt-2">Manage and track your network of farmers</p>
+          <h1 className="text-3xl font-bold text-black">Farmers Management</h1>
+          <h3 className="text-black mt-2">Manage and track your network of farmers</h3>
         </div>
         <button
           onClick={handleAddNew}

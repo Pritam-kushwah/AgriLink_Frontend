@@ -16,11 +16,19 @@ const Dashboard = ({ onShowAddFarmer, onShowAddProduce }) => {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8"
+      style={{
+        //backgroundImage: "url('/Farming2.jpg')",
+        backgroundImage: "url('/Home farm 2.jpg')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        minHeight: '100vh'
+      }}
+       >
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h2 className="text-3xl font-bold text-gray-900">Dashboard Overview</h2>
-          <p className="text-gray-600 mt-2">Monitor your agricultural supply chain in real-time</p>
+          <h2 className="text-3xl font-bold text-black">Dashboard Overview</h2>
+          <h3 className="text-black mt-2">Monitor your agricultural supply chain in real-time</h3>
         </div>
         <div className="mt-4 sm:mt-0 flex space-x-3">
           <button 
