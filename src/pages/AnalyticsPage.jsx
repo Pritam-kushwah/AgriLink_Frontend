@@ -42,7 +42,15 @@ const AnalyticsPage = () => {
         return <RegionalDistribution farmers={farmers} produces={produces} />;
       default:
         return (
-          <div className="space-y-8">
+          <div className="space-y-8"
+            style={{
+        //backgroundImage: "url('/Farming2.jpg')",
+        backgroundImage: "url('/Home farm 3.jpg')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        minHeight: '100vh'
+          }}
+          >
             {/* Key Metrics Overview */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <div className="bg-gradient-to-r from-green-50 to-green-100 rounded-2xl p-6 border border-green-200">

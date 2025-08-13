@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { User, Phone, MapPin, Mail, Building } from 'lucide-react';
 import Modal from '../common/Modal';
 import { useFarmers } from '../../hooks/useFarmers';
@@ -15,6 +15,19 @@ const AddFarmerModal = ({ isOpen, onClose, editFarmer = null }) => {
     cropTypes: editFarmer?.cropTypes?.join(', ') || '',
     experience: editFarmer?.experience || '',
   });
+
+  useEffect(() => {
+    setFormData({
+      name: editFarmer?.name || '',
+      phone: editFarmer?.phone || '',
+      email: editFarmer?.email || '',
+      location: editFarmer?.location || '',
+      farmSize: editFarmer?.farmSize || '',
+      cropTypes: editFarmer?.cropTypes?.join(', ') || '',
+      experience: editFarmer?.experience || '',
+    });
+  }, [editFarmer, isOpen]);
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -37,8 +50,9 @@ const AddFarmerModal = ({ isOpen, onClose, editFarmer = null }) => {
       };
 
       if (editFarmer) {
-        console.log('Editing farmerData:', farmerData);
+        //console.log('Editing farmerData:', farmerData);
         await updateFarmer(editFarmer.id, farmerData);
+        console.log('Editing farmerData:', farmerData);
       } else {
         console.log('Submitting farmerData:', farmerData);
         await addFarmer(farmerData);

@@ -124,7 +124,7 @@ const MarketplacePage = () => {
     <div className="space-y-6"
        style={{
         //backgroundImage: "url('/Farming2.jpg')",
-        backgroundImage: "url('/Home farm 1.jpg')",
+        backgroundImage: "url('/Home farm 4.jpg')",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         minHeight: '100vh'

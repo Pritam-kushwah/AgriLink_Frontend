@@ -12,18 +12,30 @@ const App = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [showAddFarmer, setShowAddFarmer] = useState(false);
   const [showAddProduce, setShowAddProduce] = useState(false);
+  const [editFarmer, setEditFarmer] = useState(null);
+
+
+  const handleEditFarmer = (farmer) => {
+    setEditFarmer(farmer);
+    setShowAddFarmer(true);
+  };
+
+  const handleAddFarmer = () => {
+    setEditFarmer(null); // Clear editFarmer for new farmer
+    setShowAddFarmer(true);
+  };
 
   const renderActiveTab = () => {
     switch (activeTab) {
       case 'dashboard':
         return (
           <Dashboard
-            onShowAddFarmer={() => setShowAddFarmer(true)}
+            onShowAddFarmer={handleAddFarmer}
             onShowAddProduce={() => setShowAddProduce(true)}
           />
         );
       case 'farmers':
-        return <FarmersPage onShowAddFarmer={() => setShowAddFarmer(true)} />;
+        return <FarmersPage onShowAddFarmer={handleAddFarmer} onEditFarmer={handleEditFarmer} />;
       case 'marketplace':
         return <MarketplacePage />;
       case 'analytics':
